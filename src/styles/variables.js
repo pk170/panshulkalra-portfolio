@@ -12,12 +12,12 @@ const variables = css`
     /* Text - Greyish Palette (Original Variable Names) */
     --dark-slate: #94a3b8;     /* Lightest text / metadata */
     --slate: #64748b;          /* Secondary text */
-    --light-slate: #475569;    /* MAIN TEXT: Greyish */
+    --light-slate: #282e36;    /* MAIN TEXT: Greyish */
     --lightest-slate: #1e293b; /* Headings: Dark grey */
     --white: #0f172a;          /* Previously white, now almost black for high contrast */
 
     /* Accents */
-    --green: #64ffda;          /* Kept original Neon Green */
+    --green: #64b9ff;          /* Kept original Neon Green */
     --green-tint: rgba(100, 255, 218, 0.1);
     --pink: #f57dff;
     --blue: #57cbff;
