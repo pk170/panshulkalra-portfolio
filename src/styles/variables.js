@@ -3,10 +3,10 @@ import { css } from 'styled-components';
 const variables = css`
   :root {
     /* Backgrounds - Off-White Palette (Original Variable Names) */
-    --dark-navy: #e2e8f0;      /* Borders and subtle dividers */
-    --navy: #f8f9fa;           /* MAIN BACKGROUND: Off-white */
-    --light-navy: #ffffff;     /* Card/Section backgrounds: Pure white */
-    --lightest-navy: #f1f5f9;  /* Hover states for cards */
+    --dark-navy: #ffd2fa;      /* Borders and subtle dividers */
+    --navy: #feffdc;           /* MAIN BACKGROUND: Off-white */
+    --light-navy: #5d7f88;     /* Card/Section backgrounds: Pure white */
+    --lightest-navy: #86c3ff;  /* Hover states for cards */
     --navy-shadow: rgba(0, 0, 0, 0.08); /* Softened shadow for light mode */
     
     /* Text - Greyish Palette (Original Variable Names) */
