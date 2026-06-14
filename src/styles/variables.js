@@ -2,17 +2,22 @@ import { css } from 'styled-components';
 
 const variables = css`
   :root {
-    --dark-navy: #020c1b;
-    --navy: #0a192f;
-    --light-navy: #112240;
-    --lightest-navy: #233554;
-    --navy-shadow: rgba(2, 12, 27, 0.7);
-    --dark-slate: #495670;
-    --slate: #8892b0;
-    --light-slate: #a8b2d1;
-    --lightest-slate: #ccd6f6;
-    --white: #e6f1ff;
-    --green: #64ffda;
+    /* Backgrounds - Off-White Palette (Original Variable Names) */
+    --dark-navy: #e2e8f0;      /* Borders and subtle dividers */
+    --navy: #f8f9fa;           /* MAIN BACKGROUND: Off-white */
+    --light-navy: #ffffff;     /* Card/Section backgrounds: Pure white */
+    --lightest-navy: #f1f5f9;  /* Hover states for cards */
+    --navy-shadow: rgba(0, 0, 0, 0.08); /* Softened shadow for light mode */
+    
+    /* Text - Greyish Palette (Original Variable Names) */
+    --dark-slate: #94a3b8;     /* Lightest text / metadata */
+    --slate: #64748b;          /* Secondary text */
+    --light-slate: #475569;    /* MAIN TEXT: Greyish */
+    --lightest-slate: #1e293b; /* Headings: Dark grey */
+    --white: #0f172a;          /* Previously white, now almost black for high contrast */
+
+    /* Accents */
+    --green: #64ffda;          /* Kept original Neon Green */
     --green-tint: rgba(100, 255, 218, 0.1);
     --pink: #f57dff;
     --blue: #57cbff;
