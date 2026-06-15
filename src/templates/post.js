@@ -1,6 +1,5 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
-import kebabCase from 'lodash/kebabCase';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
@@ -13,6 +12,9 @@ const StyledPostHeader = styled.header`
   margin-bottom: 50px;
   .tag {
     margin-right: 10px;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-sm);
   }
 `;
 const StyledPostContent = styled.div`
@@ -59,10 +61,34 @@ const PostTemplate = ({ data, location }) => {
       <Helmet title={title} />
 
       <StyledPostContainer>
-        <span className="breadcrumb">
-          <span className="arrow">&larr;</span>
-          <Link to="/pensieve">All memories</Link>
-        </span>
+        
+        {/* The New Sleek Back Arrow */}
+        <Link 
+          to="/blog" 
+          aria-label="Back to blogs" 
+          style={{ 
+            display: 'inline-block', 
+            marginBottom: '40px', 
+            color: 'var(--green)',
+            transition: 'var(--transition)'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.transform = 'translateX(-5px)'}
+          onMouseOut={(e) => e.currentTarget.style.transform = 'translateX(0px)'}
+        >
+          <svg 
+            width="35" 
+            height="35" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </Link>
 
         <StyledPostHeader>
           <h1 className="medium-heading">{title}</h1>
@@ -78,9 +104,9 @@ const PostTemplate = ({ data, location }) => {
             {tags &&
               tags.length > 0 &&
               tags.map((tag, i) => (
-                <Link key={i} to={`/pensieve/tags/${kebabCase(tag)}/`} className="tag">
+                <span key={i} className="tag">
                   #{tag}
-                </Link>
+                </span>
               ))}
           </p>
         </StyledPostHeader>
