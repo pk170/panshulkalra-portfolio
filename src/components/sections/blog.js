@@ -47,7 +47,6 @@ const Blog = () => {
 
   return (
     <StyledBlogSection id="blog" ref={revealContainer}>
-      <span className="overline">What's Cooking?</span>
       <h2 className="title">My Blogs</h2>
 
       <p>
@@ -55,7 +54,7 @@ const Blog = () => {
       </p>
 
       <Link className="email-link" to="/blog">
-        Read my blog &rarr;
+        Read my blogs &rarr;
       </Link>
     </StyledBlogSection>
   );
