@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
@@ -62,11 +62,15 @@ const PostTemplate = ({ data, location }) => {
 
       <StyledPostContainer>
         
-        {/* The New Sleek Back Arrow */}
-        <Link 
-          to="/blog" 
-          aria-label="Back to blogs" 
+        {/* The Native History Back Arrow */}
+        <button 
+          onClick={() => window.history.back()} 
+          aria-label="Go back" 
           style={{ 
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            cursor: 'pointer',
             display: 'inline-block', 
             marginBottom: '40px', 
             color: 'var(--green)',
@@ -88,7 +92,7 @@ const PostTemplate = ({ data, location }) => {
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
-        </Link>
+        </button>
 
         <StyledPostHeader>
           <h1 className="medium-heading">{title}</h1>

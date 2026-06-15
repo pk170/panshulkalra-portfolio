@@ -207,7 +207,20 @@ const Nav = ({ isHome }) => {
   if (!isHome) {
     return (
       <header style={{ position: 'absolute', top: '40px', left: '50px', zIndex: 99 }}>
-        <Link to="/" aria-label="Back to home" style={{ color: 'var(--green)' }}>
+        <button 
+          onClick={() => window.history.back()} 
+          aria-label="Go back" 
+          style={{ 
+            background: 'none', 
+            border: 'none', 
+            padding: 0, 
+            cursor: 'pointer', 
+            color: 'var(--green)',
+            transition: 'var(--transition)'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.transform = 'translateX(-5px)'}
+          onMouseOut={(e) => e.currentTarget.style.transform = 'translateX(0px)'}
+        >
           <svg 
             width="35" 
             height="35" 
@@ -221,7 +234,7 @@ const Nav = ({ isHome }) => {
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
-        </Link>
+        </button>
       </header>
     );
   }
@@ -302,3 +315,4 @@ Nav.propTypes = {
 };
 
 export default Nav;
+

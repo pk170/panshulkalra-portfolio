@@ -12,7 +12,12 @@ const StyledContent = styled.div`
 
 const Layout = ({ children, location }) => {
   const isHome = location.pathname === '/';
-  const [isLoading, setIsLoading] = useState(isHome);
+  const [isLoading, setIsLoading] = useState(() => {
+  if (typeof window !== 'undefined') {
+    return window.sessionStorage.getItem('hasSeenIntro') ? false : isHome;
+  }
+  return isHome;
+});
 
   // Sets target="_blank" rel="noopener noreferrer" on external links
   const handleExternalLinks = () => {
@@ -59,7 +64,12 @@ const Layout = ({ children, location }) => {
           </a>
 
           {isLoading && isHome ? (
-            <Loader finishLoading={() => setIsLoading(false)} />
+            <Loader finishLoading={() => {
+  if (typeof window !== 'undefined') {
+    window.sessionStorage.setItem('hasSeenIntro', 'true');
+  }
+  setIsLoading(false);
+}} />
           ) : (
             <StyledContent>
               <Nav isHome={isHome} />
