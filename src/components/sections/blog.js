@@ -46,7 +46,7 @@ const Blog = () => {
   }, []);
 
   return (
-    <StyledBlogSection id="blogs" ref={revealContainer}>
+    <StyledBlogSection id="blog" ref={revealContainer}>
       <h2 className="title">My Blogs</h2>
 
       <p>

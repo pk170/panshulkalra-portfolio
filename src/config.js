@@ -33,7 +33,7 @@ module.exports = {
     },
     {
       name: 'Blogs',
-      url : '/#blogs'
+      url : '/#blog'
     },
     
     {

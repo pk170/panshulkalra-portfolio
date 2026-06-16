@@ -217,8 +217,15 @@ const Nav = ({ isHome }) => {
         // Send them up one level, and attach the hidden scroll payload
         navigate(pathParts.join('/') + '/', { state: { customBack: true } });
       } else {
-        // If we are at /blog, send them perfectly to the homepage blogs section
-        navigate('/#blogs');
+        // DYNAMIC FALLBACK: Reads 'blog' from '/blog' or 'projects' from '/projects'
+        const rootDirectory = pathParts[1]; 
+        
+        // Automatically constructs the URL to scroll to the matching homepage section
+        if (rootDirectory) {
+          navigate(`/#${rootDirectory}`);
+        } else {
+          navigate('/');
+        }
       }
     };
 
@@ -246,7 +253,7 @@ const Nav = ({ isHome }) => {
       </header>
     );
   }
-  
+
   return (
     <StyledHeader scrollDirection={scrollDirection} scrolledToTop={scrolledToTop}>
       <StyledNav>
