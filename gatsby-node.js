@@ -10,6 +10,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const postTemplate = path.resolve(`src/templates/post.js`);
 
+  // UPDATED: Added 'series' to the GraphQL query so the backend can read your tags
   const result = await graphql(`
     {
       postsRemark: allMarkdownRemark(
@@ -21,6 +22,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           node {
             frontmatter {
               slug
+              series
             }
           }
         }
@@ -44,11 +46,37 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       context: {},
     });
   });
+
+  // --- THE NEW SERIES GENERATOR ---
+  const seriesTemplate = path.resolve('./src/templates/series.js');
+  const seriesSet = new Set();
+  
+  // Find all unique series names
+  posts.forEach(({ node }) => {
+    if (node.frontmatter.series) {
+      seriesSet.add(node.frontmatter.series);
+    }
+  });
+
+  // Create a true server-side page for each series folder
+  seriesSet.forEach(seriesName => {
+    // Converts "Nvidia" to "nvidia" to make clean slugs
+    const formattedSlug = seriesName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    const seriesUrl = `/blog/${formattedSlug}`;
+
+    createPage({
+      path: seriesUrl,
+      component: seriesTemplate,
+      context: {
+        series: seriesName, // Passes the exact name to the template's GraphQL query
+      },
+    });
+  });
+  // --------------------------------
 };
 
 // https://www.gatsbyjs.org/docs/node-apis/#onCreateWebpackConfig
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  // https://www.gatsbyjs.org/docs/debugging-html-builds/#fixing-third-party-modules
   if (stage === 'build-html' || stage === 'develop-html') {
     actions.setWebpackConfig({
       module: {

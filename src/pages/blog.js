@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
@@ -57,7 +57,7 @@ const StyledMainContainer = styled.main`
     padding: 2.25rem 1.75rem;
     border-radius: var(--border-radius);
     border: 1px solid transparent;
-    cursor: pointer;
+    text-decoration: none;
     transition: var(--transition);
     display: flex;
     flex-direction: column;
@@ -129,10 +129,7 @@ const StyledMainContainer = styled.main`
     &:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 30px -15px var(--navy-shadow);
-      
-      h3 {
-        color: var(--green);
-      }
+      h3 { color: var(--green); }
     }
   }
 `;
@@ -140,7 +137,6 @@ const StyledMainContainer = styled.main`
 const BlogPage = ({ location, data }) => {
   const posts = data.allMarkdownRemark.edges;
   
-  // 1. Grouping pipeline
   const seriesGroups = {};
   const independentPosts = [];
 
@@ -158,117 +154,50 @@ const BlogPage = ({ location, data }) => {
 
   const uniqueSeriesNames = Object.keys(seriesGroups);
 
-  // 2. State Initialization: Check if the URL has a hash (e.g., #nvidia-series) when loading
-  const [activeSeries, setActiveSeries] = useState(() => {
-    if (typeof window !== 'undefined' && window.location.hash) {
-      const hash = window.location.hash.substring(1);
-      const match = uniqueSeriesNames.find(
-        name => name.replace(/\s+/g, '-').toLowerCase() === hash
-      );
-      return match || null;
-    }
-    return null;
-  });
-
-  // 3. History Event Listener: Watch for the universal back button being pressed
-  useEffect(() => {
-    const handlePopState = () => {
-      if (window.location.hash) {
-        const hash = window.location.hash.substring(1);
-        const match = uniqueSeriesNames.find(
-          name => name.replace(/\s+/g, '-').toLowerCase() === hash
-        );
-        setActiveSeries(match || null);
-      } else {
-        setActiveSeries(null);
-      }
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, [uniqueSeriesNames]);
-
-  // 4. Interaction Engine: Push to browser history when opening a folder
-  const handleOpenSeries = (seriesName) => {
-    const hash = seriesName.replace(/\s+/g, '-').toLowerCase();
-    window.history.pushState(null, '', `#${hash}`);
-    setActiveSeries(seriesName);
-  };
-
   return (
     <Layout location={location}>
       <Helmet title="Publications | Portfolio" />
 
       <StyledMainContainer className="fillHeight">
-        
-        {/* VIEW 1: Main Feed (Folders + Independent Posts) */}
-        {!activeSeries ? (
+        <header>
+          <h1 className="title">All my blogs</h1>
+          <p className="subtitle">Explorations in tech, strategy, and systems</p>
+        </header>
+
+        {uniqueSeriesNames.length > 0 && (
           <>
-            <header>
-              <h1 className="title">All my blogs</h1>
-              <p className="subtitle">Explorations in tech, strategy, and systems</p>
-            </header>
-
-            {uniqueSeriesNames.length > 0 && (
-              <>
-                <h2 className="grid-section-title">Curated Series</h2>
-                <div className="unified-grid">
-                  {uniqueSeriesNames.map(seriesName => {
-                    const totalParts = seriesGroups[seriesName].length;
-                    const folderDesc = seriesGroups[seriesName][0].frontmatter.description;
-
-                    return (
-                      <div 
-                        key={seriesName} 
-                        className="folder-card"
-                        onClick={() => handleOpenSeries(seriesName)}
-                      >
-                        <div className="folder-icon">📂</div>
-                        <h3>{seriesName}</h3>
-                        <p>{folderDesc}</p>
-                        <div className="meta-info">⚡ {totalParts} {totalParts === 1 ? 'Part' : 'Parts'}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </>
-            )}
-
-            {independentPosts.length > 0 && (
-              <>
-                <h2 className="grid-section-title">Independent Articles</h2>
-                <div className="unified-grid">
-                  {independentPosts.map((node, i) => {
-                    const { title, description, date, slug } = node.frontmatter;
-                    const formattedDate = new Date(date).toLocaleDateString('en-US', {
-                      year: 'numeric', month: 'long', day: 'numeric',
-                    });
-
-                    return (
-                      <Link key={i} to={slug} className="article-card">
-                        <span className="date">{formattedDate}</span>
-                        <h3>{title}</h3>
-                        <p>{description}</p>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </>
-            )}
-          </>
-        ) : (
-          
-          /* VIEW 2: Sub-Page (Inside a Specific Series Folder) */
-          <>
-            <header style={{ textAlign: 'left', marginBottom: '40px' }}>
-              <span className="subtitle">Series Publication</span>
-              <h1 className="title" style={{ textAlign: 'left', fontSize: 'clamp(30px, 4vw, 45px)' }}>
-                {activeSeries}
-              </h1>
-            </header>
-
+            <h2 className="grid-section-title">Curated Series</h2>
             <div className="unified-grid">
-              {seriesGroups[activeSeries].map((node, i) => {
+              {uniqueSeriesNames.map(seriesName => {
+                const totalParts = seriesGroups[seriesName].length;
+                const folderDesc = seriesGroups[seriesName][0].frontmatter.description;
+                
+                // Formats the URL exactly the same way gatsby-node did
+                const formattedSlug = seriesName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+                const seriesUrl = `/blog/${formattedSlug}`;
+
+                return (
+                  <Link 
+                    key={seriesName} 
+                    to={seriesUrl}
+                    className="folder-card"
+                  >
+                    <div className="folder-icon">📂</div>
+                    <h3>{seriesName}</h3>
+                    <p>{folderDesc}</p>
+                    <div className="meta-info">⚡ {totalParts} {totalParts === 1 ? 'Part' : 'Parts'}</div>
+                  </Link>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {independentPosts.length > 0 && (
+          <>
+            <h2 className="grid-section-title">Independent Articles</h2>
+            <div className="unified-grid">
+              {independentPosts.map((node, i) => {
                 const { title, description, date, slug } = node.frontmatter;
                 const formattedDate = new Date(date).toLocaleDateString('en-US', {
                   year: 'numeric', month: 'long', day: 'numeric',
@@ -276,7 +205,7 @@ const BlogPage = ({ location, data }) => {
 
                 return (
                   <Link key={i} to={slug} className="article-card">
-                    <span className="date">Part {i + 1} — {formattedDate}</span>
+                    <span className="date">{formattedDate}</span>
                     <h3>{title}</h3>
                     <p>{description}</p>
                   </Link>
@@ -285,7 +214,6 @@ const BlogPage = ({ location, data }) => {
             </div>
           </>
         )}
-
       </StyledMainContainer>
     </Layout>
   );

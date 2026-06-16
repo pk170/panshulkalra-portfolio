@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled, { css } from 'styled-components';
@@ -8,6 +7,7 @@ import { loaderDelay } from '@utils';
 import { useScrollDirection, usePrefersReducedMotion } from '@hooks';
 import { Menu } from '@components';
 import { IconLogo, IconHex } from '@components/icons';
+import { Link, navigate } from 'gatsby';
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -203,13 +203,28 @@ const Nav = ({ isHome }) => {
     </a>
   );
 
-  // Bypass the main navigation on all non-home pages
+ // Bypass the main navigation on all non-home pages
   if (!isHome) {
+    const handleSmartBack = () => {
+      // Get the current URL (e.g., /blog/nvidia/part-1)
+      const currentPath = window.location.pathname.replace(/\/$/, ''); 
+      const pathParts = currentPath.split('/');
+
+      // If we are deep in a folder (e.g., length > 2), chop off the last part and go up one level
+      if (pathParts.length > 2) {
+        pathParts.pop();
+        navigate(pathParts.join('/') + '/');
+      } else {
+        // If we are just at /blog or /about, go back to the home page
+        navigate('/');
+      }
+    };
+
     return (
       <header style={{ position: 'absolute', top: '40px', left: '50px', zIndex: 99 }}>
         <button 
-          onClick={() => window.history.back()} 
-          aria-label="Go back" 
+          onClick={handleSmartBack} 
+          aria-label="Go back up one level" 
           style={{ 
             background: 'none', 
             border: 'none', 
@@ -221,16 +236,7 @@ const Nav = ({ isHome }) => {
           onMouseOver={(e) => e.currentTarget.style.transform = 'translateX(-5px)'}
           onMouseOut={(e) => e.currentTarget.style.transform = 'translateX(0px)'}
         >
-          <svg 
-            width="35" 
-            height="35" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-          >
+          <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
@@ -238,7 +244,6 @@ const Nav = ({ isHome }) => {
       </header>
     );
   }
-
   return (
     <StyledHeader scrollDirection={scrollDirection} scrolledToTop={scrolledToTop}>
       <StyledNav>
