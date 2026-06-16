@@ -12,12 +12,16 @@ const StyledContent = styled.div`
 
 const Layout = ({ children, location }) => {
   const isHome = location.pathname === '/';
-  const [isLoading, setIsLoading] = useState(() => {
-  if (typeof window !== 'undefined') {
-    return window.sessionStorage.getItem('hasSeenIntro') ? false : isHome;
-  }
-  return isHome;
-});
+  const [isLoading, setIsLoading] = useState(isHome);
+
+  useEffect(() => {
+    // This runs a millisecond after the DOM safely loads, preventing layout crashes
+    if (isLoading && isHome) {
+      if (window.sessionStorage.getItem('hasSeenIntro')) {
+        setIsLoading(false);
+      }
+    }
+  }, [isLoading, isHome]);
 
   // Sets target="_blank" rel="noopener noreferrer" on external links
   const handleExternalLinks = () => {
