@@ -61,13 +61,15 @@ const Hero = () => {
 
   const one = <h1>Hi, my name is</h1>;
   const two = <h2 className="big-heading">Panshul Kalra.</h2>;
-  const three = <h3 className="big-heading">I build scalable systems. </h3>;
+  const three = <h3 className="big-heading">I build data-driven analytical models. </h3>;
   const four = (
     <>
       <p>
-        I'm a computer engineering student specializing in building machine learning models and scalable software architectures. 
-        Currently, my core research and development focus is on the ESG compliance, India Energy Stack and energy flexibility markets.
-        
+       I am an engineering student focused on building Machine Learning applications that utilise Pythong, Pandas and Scikit-Learn.
+       I have developed analytical programs ranging from sales forcasting tools and sophisticated clustering models to 
+       my current bioinformatics research building clinical outcome models for cancer datasets. 
+       Beyond developing predictive architecures, I am also deply interested in applying technology to sustainablity and ESG frameorks.
+       
       </p>
        
     </>
