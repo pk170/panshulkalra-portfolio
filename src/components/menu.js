@@ -20,7 +20,7 @@ const StyledHamburgerButton = styled.button`
   @media (max-width: 768px) {
     ${({ theme }) => theme.mixins.flexCenter};
     position: relative;
-    z-index: 10;
+    z-index: 100; /* Massively increased to overpower the sidebar */
     margin-right: -15px;
     padding: 15px;
     border: 0;
@@ -30,6 +30,8 @@ const StyledHamburgerButton = styled.button`
     transition-timing-function: linear;
     transition-duration: 0.15s;
     transition-property: opacity, filter;
+    pointer-events: auto !important; /* Forces clickability */
+    transform: translateZ(0); /* Forces the button into the top hardware layer */
   }
 
   .ham-box {
@@ -98,7 +100,7 @@ const StyledSidebar = styled.aside`
     width: min(75vw, 400px);
     height: 100vh;
     outline: 0;
-    background-color: var(--light-navy);
+    background-color: var(--navy);
     box-shadow: -10px 0px 30px -15px var(--navy-shadow);
     z-index: 9;
     transform: translateX(${props => (props.menuOpen ? 0 : 100)}vw);
@@ -124,19 +126,10 @@ const StyledSidebar = styled.aside`
     li {
       position: relative;
       margin: 0 auto 20px;
-      counter-increment: item 1;
       font-size: clamp(var(--fz-sm), 4vw, var(--fz-lg));
 
       @media (max-width: 600px) {
         margin: 0 auto 10px;
-      }
-
-      &:before {
-        content: '0' counter(item) '.';
-        display: block;
-        margin-bottom: 5px;
-        color: var(--green);
-        font-size: var(--fz-sm);
       }
     }
 
@@ -277,3 +270,4 @@ const Menu = () => {
 };
 
 export default Menu;
+
