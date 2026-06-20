@@ -29,10 +29,12 @@ const StyledHeroSection = styled.section`
     }
   }
 
-  h3 {
+  /* TARGETED OVERRIDE: Forces the h3 to scale perfectly for a single line */
+  h3.big-heading {
     margin-top: 5px;
     color: var(--slate);
     line-height: 0.9;
+    font-size: clamp(30px, 5.5vw, 60px); 
   }
 
   p {
@@ -61,20 +63,17 @@ const Hero = () => {
 
   const one = <h1>Hi, my name is</h1>;
   const two = <h2 className="big-heading">Panshul Kalra.</h2>;
-  const three = <h3 className="big-heading">I build data-driven analytical models. </h3>;
+  const three = <h3 className="big-heading">I build data-driven analytical models.</h3>;
   const four = (
     <>
       <p>
-       I am an engineering student focused on building Machine Learning applications that utilise Pythong, Pandas and Scikit-Learn.
-       I have developed analytical programs ranging from sales forcasting tools and sophisticated clustering models to 
+       I am an engineering student focused on building Machine Learning applications that utilise Python, Pandas, and Scikit-Learn.
+       I have developed analytical programs ranging from sales forecasting tools and sophisticated clustering models to 
        my current bioinformatics research building clinical outcome models for cancer datasets. 
-       Beyond developing predictive architecures, I am also deply interested in applying technology to sustainablity and ESG frameorks.
-       
+       Beyond developing predictive architectures, I am also deeply interested in applying technology to sustainability and ESG frameworks.
       </p>
-       
     </>
   );
- 
 
   const items = [one, two, three, four];
 
