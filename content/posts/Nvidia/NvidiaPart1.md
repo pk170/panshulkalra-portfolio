@@ -7,6 +7,9 @@ series: 'Nvidia Series'
 tags:
   - Nvidia part-1.
 
+---
+
+
 > "It's a funny thing about life; if you refuse to accept anything but the best, you very often get it," — W. Somerset Maugham
 
 On the surface, this quote sounds like naive optimism. After all, the real world many times ‘seems’ notoriously indifferent to what you want!
