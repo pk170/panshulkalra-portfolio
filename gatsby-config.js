@@ -3,7 +3,7 @@ const config = require('./src/config');
 module.exports = {
   siteMetadata: {
     title: 'Panshul Kalra',
-    description: 'I build data-driven analytical models. Explorations in tech, strategy, and systems.', // NEW: SEO Boosted description
+    description: 'I build data driven analytical models. Explorations in tech, strategy and systems.',
     siteUrl: 'https://panshulkalra.github.io', // No trailing slash allowed!
     image: '/og.png', 
     twitterUsername: '@Panshul589625',
@@ -14,7 +14,7 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sitemap`, // Activated and ready
+    `gatsby-plugin-sitemap`, 
     `gatsby-plugin-robots-txt`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -74,7 +74,6 @@ module.exports = {
               maxWidth: 700,
               linkImagesToOriginal: true,
               quality: 90,
-              tracedSVG: { color: config.colors.green },
             },
           },
           {
