@@ -60,7 +60,7 @@ const Blog = () => {
        A space for ideas, observations, and deep dives into the topics I find fascinating.
       </p>
       <Link className="blog-link" to="/blog">
-        Read Blogs
+        Read my blogs 
       </Link>
     </StyledBlogSection>
   );
