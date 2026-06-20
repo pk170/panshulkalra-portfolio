@@ -5,17 +5,17 @@ import styled from 'styled-components';
 import { Layout } from '@components';
 
 const StyledMainContainer = styled.main`
-  padding: 220px 0 100px;
+  padding: 200px 0 100px;
   max-width: 1000px;
   margin: 0 auto;
 
-  /* NEW: Forces the content down on mobile so it clears the back arrow */
   @media (max-width: 768px) {
-    padding-top: 120px;
+    padding-top: 150px;
   }
 
   header {
     text-align: center;
+    margin-top: 50px; /* NEW: Hard push to keep text below the arrow */
     margin-bottom: 60px;
 
     .title {
@@ -159,12 +159,10 @@ const BlogPage = ({ location, data }) => {
 
   const uniqueSeriesNames = Object.keys(seriesGroups);
 
-  // 1. Save Position Function
   const saveScroll = () => {
     window.sessionStorage.setItem('scroll-blog-main', window.scrollY);
   };
 
-  // 2. Restore Position Listener
   useEffect(() => {
     if (location.state?.customBack) {
       const savedPosition = window.sessionStorage.getItem('scroll-blog-main');

@@ -5,25 +5,22 @@ import styled from 'styled-components';
 import { Layout } from '@components';
 
 const StyledMainContainer = styled.main`
-  padding: 220px 0 100px;
+  padding: 200px 0 100px;
   max-width: 1000px;
   margin: 0 auto;
 
+  @media (max-width: 768px) {
+    padding-top: 150px;
+  }
+
   header {
-    text-align: left;
-    margin-bottom: 40px;
+    text-align: center; /* Centered as requested */
+    margin-top: 50px; /* Dropped lower down */
+    margin-bottom: 60px;
 
     .title {
-      font-size: clamp(30px, 4vw, 45px);
+      font-size: clamp(40px, 5vw, 60px);
       color: var(--lightest-slate);
-    }
-    
-    .subtitle {
-      color: var(--green);
-      font-family: var(--font-mono);
-      font-size: var(--fz-md);
-      margin-bottom: 10px;
-      display: block;
     }
   }
 
@@ -75,12 +72,10 @@ const SeriesTemplate = ({ pageContext, data, location }) => {
   const { series } = pageContext;
   const posts = data.allMarkdownRemark.edges;
 
-  // 1. Save Position Function (Tagged dynamically to the specific series name)
   const saveScroll = () => {
     window.sessionStorage.setItem(`scroll-${series}`, window.scrollY);
   };
 
-  // 2. Restore Position Listener
   useEffect(() => {
     if (location.state?.customBack) {
       const savedPosition = window.sessionStorage.getItem(`scroll-${series}`);
@@ -96,7 +91,7 @@ const SeriesTemplate = ({ pageContext, data, location }) => {
 
       <StyledMainContainer className="fillHeight">
         <header>
-          <span className="subtitle">Series Publication</span>
+          {/* Subtitle explicitly removed */}
           <h1 className="title">{series}</h1>
         </header>
 
