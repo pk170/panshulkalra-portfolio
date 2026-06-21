@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---src-pages-blog-js",
     "path": "/blog/",
-    "result": {"data":{"allMarkdownRemark":{"edges":[{"node":{"frontmatter":{"title":"The overnight success, 30 years in the making.","description":"The rise of Nvidia","date":"2026-06-18","slug":"/blog/nvidia-series/part-1","series":"Nvidia Series"}}},{"node":{"frontmatter":{"title":"Zero Margin For Error","description":"How a ticking clock and $5 million forced Nvidia to revolutionize semiconductor engineering.","date":"2026-06-21","slug":"/blog/nvidia-series/part-2","series":"Nvidia Series"}}}]}},"pageContext":{}},
+    "result": {"data":{"allMarkdownRemark":{"edges":[{"node":{"frontmatter":{"title":"The overnight success, 30 years in the making.","description":"The rise of Nvidia","date":"2026-06-18","slug":"/blog/nvidia-series/part-1","series":"Nvidia Series"}}},{"node":{"frontmatter":{"title":"Zero Margin For Error","description":"How a ticking clock and $5 million forced Nvidia to revolutionize the semiconductor industry.","date":"2026-06-21","slug":"/blog/nvidia-series/part-2","series":"Nvidia Series"}}}]}},"pageContext":{}},
     "staticQueryHashes": ["1994492073"]}
