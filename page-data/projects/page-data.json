@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---src-pages-projects-js",
     "path": "/projects/",
-    "result": {"data":{"allMarkdownRemark":{"edges":[{"node":{"frontmatter":{"date":"February 2026","title":"Sales Prediction Algorithm","slug":"/projects/sales-prediction"}}}]}},"pageContext":{}},
+    "result": {"data":{"allMarkdownRemark":{"edges":[{"node":{"frontmatter":{"date":"February 2026","title":"Sales Prediction Algorithm","slug":"/projects/sales-prediction","description":"A machine learning model utilizing linear regression to forecast retail performance, built with Pandas and Scikit-Learn."}}}]}},"pageContext":{}},
     "staticQueryHashes": ["1994492073"]}
