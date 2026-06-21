@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Layout } from '@components';
@@ -16,24 +16,6 @@ const StyledProjectContainer = styled.main`
 
 const StyledProjectHeader = styled.header`
   margin-bottom: 50px;
-  
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    color: var(--green);
-    font-family: var(--font-mono);
-    font-size: var(--fz-sm);
-    
-    a {
-      display: inline-block;
-      padding: 0 10px;
-      &:hover,
-      &:focus {
-        color: var(--green-tint);
-      }
-    }
-  }
 
   h1 {
     font-size: clamp(30px, 5vw, 50px);
@@ -86,23 +68,16 @@ const StyledProjectContent = styled.div`
   }
 `;
 
-// FIXED: Added location prop here
 const ProjectTemplate = ({ location, data }) => {
   const { markdownRemark } = data;
   const { frontmatter, html } = markdownRemark;
   const { title, github } = frontmatter;
 
   return (
-    // FIXED: Passed location prop to Layout here
     <Layout location={location}>
       <Helmet title={title} />
       <StyledProjectContainer>
         <StyledProjectHeader>
-          <div className="breadcrumb">
-            <span className="arrow">&larr;</span>
-            <Link to="/projects">All Projects</Link>
-          </div>
-          
           <h1 className="title">{title}</h1>
           
           {github && (
