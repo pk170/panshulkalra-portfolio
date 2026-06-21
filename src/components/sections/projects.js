@@ -11,8 +11,11 @@ const StyledProjectsSection = styled.section`
   padding: 100px 0;
 
   h2 {
-    font-size: clamp(24px, 5vw, 32px);
-    margin-bottom: 40px;
+    /* SCALED UP TO MATCH 'MY BLOGS' EXACTLY */
+    font-size: clamp(40px, 5vw, 60px); 
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: var(--lightest-slate);
   }
 
   .projects-grid {
@@ -117,7 +120,8 @@ const Projects = () => {
 
   return (
     <StyledProjectsSection id="projects">
-      <h2 className="heading">Featured Work</h2>
+      {/* TEXT CHANGED HERE */}
+      <h2>My Projects</h2>
 
       <div className="projects-grid">
         {projectEdges.map(({ node }, i) => {
@@ -134,7 +138,6 @@ const Projects = () => {
           );
         })}
 
-        {/* Slot 3: The Programmatic Gateway Card */}
         <Link to="/projects" className="project-card more-card">
           <span>More Projects</span>
           <div className="arrow">&rarr;</div>
@@ -145,3 +148,4 @@ const Projects = () => {
 };
 
 export default Projects;
+

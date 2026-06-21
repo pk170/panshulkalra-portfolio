@@ -131,6 +131,13 @@ const StyledLinks = styled.div`
 
       a {
         padding: 10px;
+        color: #ffffff; /* FORCED PURE WHITE TEXT */
+        transition: var(--transition);
+
+        &:hover,
+        &:focus {
+          color: var(--green); /* Optional: Keeps a nice highlight when hovered */
+        }
       }
     }
   }
@@ -139,17 +146,25 @@ const StyledLinks = styled.div`
     ${({ theme }) => theme.mixins.smallButton};
     margin-left: 15px;
     font-size: var(--fz-xs);
+    color: #ffffff; /* FORCED PURE WHITE TEXT */
+    border: 1px solid #ffffff; /* FORCED PURE WHITE BORDER */
+
+    &:hover,
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.1); /* Subtle white glow on hover */
+      border-color: #ffffff;
+      outline: none;
+    }
   }
 `;
 
-/* NEW: Responsive Back Button Wrapper */
+/* Responsive Back Button Wrapper */
 const StyledBackButtonHeader = styled.header`
   position: absolute;
   top: 40px;
   left: 50px;
   z-index: 99;
 
-  /* Mobile adjustment: Pulls it tighter into the top corner */
   @media (max-width: 768px) {
     top: 25px;
     left: 20px;
