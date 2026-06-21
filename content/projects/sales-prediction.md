@@ -3,7 +3,7 @@ title: 'Sales Prediction Algorithm'
 description: 'A machine learning model utilizing linear regression to forecast retail performance, built with Pandas and Scikit-Learn.'
 date: '2026-02-15'
 slug: '/projects/sales-prediction'
-github: 'https://github.com/panshulkalra/sales-prediction'
+github: 'https://github.com/panshulkalra/Retail-Sales-Forecasting'
 ---
 
 ## The Objective
